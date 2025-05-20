@@ -28,19 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
+            dataGridViewGames = new DataGridView();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewGames).BeginInit();
             SuspendLayout();
+            // 
+            // dataGridViewGames
+            // 
+            dataGridViewGames.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewGames.Dock = DockStyle.Fill;
+            dataGridViewGames.Location = new Point(0, 0);
+            dataGridViewGames.Name = "dataGridViewGames";
+            dataGridViewGames.Size = new Size(284, 261);
+            dataGridViewGames.TabIndex = 0;
+            dataGridViewGames.CellContentClick += dataGridViewGames_CellContentClick;
             // 
             // Form1
             // 
             ClientSize = new Size(284, 261);
+            Controls.Add(dataGridViewGames);
             Name = "Form1";
             Load += Form1_Load;
+            ((System.ComponentModel.ISupportInitialize)dataGridViewGames).EndInit();
             ResumeLayout(false);
 
         }
 
         #endregion
 
-
+        public DataGridView dataGridViewGames;
     }
 }
