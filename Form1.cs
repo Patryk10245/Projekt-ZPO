@@ -1,25 +1,23 @@
 
-
+using Newtonsoft.Json;
 namespace Projekt_ZPO
 {
 
 
     public partial class Form1 : Form
     {
+        LibraryStorage storage;
+        private Library library = new Library();
+
         public Form1()
         {
             InitializeComponent();
-
-            library.AddGame(new Game("Minecraft", Game.GenreType.Survival, "PC", 2011, "Sandbox", 300, 9.5));
-            library.AddGame(new Game("The Witcher 3", Game.GenreType.RPG, "PC", 2015, "Open World RPG", 100, 10));
-            library.AddGame(new Game("FIFA 22", Game.GenreType.Sports, "PC", 2021, "Football Simulation", 50, 8.5));
-            library.AddGame(new Game("Call of Duty", Game.GenreType.Action, "PC", 2003, "First-Person Shooter", 20, 9));
-            library.AddGame(new Game("The Legend of Zelda: Breath of the Wild", Game.GenreType.Adventure, "Nintendo Switch", 2017, "Open World Adventure", 200, 10));
-
         }
-        private Library library = new Library();
+
         private void Form1_Load(object sender, EventArgs e)
         {
+            storage = new LibraryStorage();
+            library = storage.LoadLibrary();
             RefreshGameTable();
         }
 
@@ -50,6 +48,7 @@ namespace Projekt_ZPO
                 {
                     library.AddGame(addGameForm.NewGame);
                     RefreshGameTable();
+                    storage.SaveLibrary(library);
                 }
                 catch (GameAlreadyExistsException ex)
                 {
@@ -145,9 +144,9 @@ namespace Projekt_ZPO
             {
                 throw new GameAlreadyExistsException(game.Title);
             }
-
             Games.Add(game);
         }
+
         public void RemoveGame(Game game)
         {
             bool removed = Games.Remove(game);
@@ -157,6 +156,7 @@ namespace Projekt_ZPO
                 throw new GameNotFoundException(game.Title);
             }
         }
+
         public void UpdateGame(Game oldGame, Game newGame)
         {
             var index = Games.FindIndex(g => g.Title == oldGame.Title);
@@ -176,6 +176,41 @@ namespace Projekt_ZPO
 
     }
 
+    public class LibraryStorage 
+    {
+        private string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\GameCollection.json");
+        public void SaveLibrary(Library library)
+        {
+            try
+            {
+                string json = JsonConvert.SerializeObject(library, Formatting.Indented);
+                File.WriteAllText(filePath, json);
+                Console.WriteLine(Path.GetFullPath(filePath));
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Error saving collection: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+        public Library LoadLibrary()
+        {
+            if (File.Exists(filePath))
+            {
+                string json = File.ReadAllText(filePath);
+                return JsonConvert.DeserializeObject<Library>(json);
+            }
+            else
+            {
+                return new Library();
+            }
+        }
+
+    }
+    public class AppConfig
+    { }
+
+
     public class GameAlreadyExistsException : Exception
     {
         public GameAlreadyExistsException(string title) : base($"Gra {title} ju¿ jest w bibliotece.") { }
@@ -184,7 +219,4 @@ namespace Projekt_ZPO
     {
         public GameNotFoundException(string title) : base($"Gra {title} nie zosta³a znaleziona w bibliotece.") { }
     }
-    public class AppConfig
-    { }
-
 }

@@ -1,0 +1,13 @@
+{
+  "Games": [
+    {
+      "Title": "Minecraft",
+      "Platform": "PC",
+      "ReleaseDate": 2011,
+      "Description": "Minecraft is good",
+      "PlayTime": 1000.0,
+      "UserRating": 9.0,
+      "Genre": 9
+    }
+  ]
+}
