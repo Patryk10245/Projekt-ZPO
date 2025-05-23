@@ -10,20 +10,25 @@ namespace Projekt_ZPO
         {
             InitializeComponent();
 
-            //Library library = new Library();
-            
             library.AddGame(new Game("Minecraft", Game.GenreType.Survival, "PC", 2011, "Sandbox", 300, 9.5));
             library.AddGame(new Game("The Witcher 3", Game.GenreType.RPG, "PC", 2015, "Open World RPG", 100, 10));
             library.AddGame(new Game("FIFA 22", Game.GenreType.Sports, "PC", 2021, "Football Simulation", 50, 8.5));
             library.AddGame(new Game("Call of Duty", Game.GenreType.Action, "PC", 2003, "First-Person Shooter", 20, 9));
             library.AddGame(new Game("The Legend of Zelda: Breath of the Wild", Game.GenreType.Adventure, "Nintendo Switch", 2017, "Open World Adventure", 200, 10));
 
+        }
+        private Library library = new Library();
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            RefreshGameTable();
+        }
 
+        private void dataGridViewGames_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
 
         }
 
-        private Library library = new Library();
-        private void Form1_Load(object sender, EventArgs e)
+        private void RefreshGameTable()
         {
             dataGridViewGames.DataSource = library.Games.Select(g => new
             {
@@ -36,10 +41,55 @@ namespace Projekt_ZPO
                 Genre = g.Genre.ToString()
             }).ToList();
         }
-
-        private void dataGridViewGames_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void btnAddGame_Click(object sender, EventArgs e)
         {
+            var addGameForm = new AddGameForm();
+            if (addGameForm.ShowDialog() == DialogResult.OK)
+            {
+                try
+                {
+                    library.AddGame(addGameForm.NewGame);
+                    RefreshGameTable();
+                }
+                catch (GameAlreadyExistsException ex)
+                {
+                    MessageBox.Show(ex.Message, "B³¹d", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void btnRemoveGame_Click(object sender, EventArgs e)
+        {
+            if (dataGridViewGames.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("No games selected to delete.", "Empty", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
+            var confirmRemove = MessageBox.Show(
+                $"Are you sure to remove {dataGridViewGames.SelectedRows.Count} games?", 
+                "Agreed", MessageBoxButtons.YesNo, 
+                MessageBoxIcon.Warning);
+
+            foreach (DataGridViewRow row in dataGridViewGames.SelectedRows)
+            {
+            Game removeGame = library.Games.FirstOrDefault(g => g.Title == dataGridViewGames.CurrentRow.Cells[0].Value.ToString());
+            if (removeGame != null && confirmRemove == DialogResult.Yes)
+            {
+                try
+                {
+                    library.RemoveGame(removeGame);
+                }
+                catch (GameNotFoundException ex)
+                {
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("No games on list to delete.", "Empty", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            RefreshGameTable();
+            }
         }
     }
 
@@ -100,9 +150,9 @@ namespace Projekt_ZPO
         }
         public void RemoveGame(Game game)
         {
-            Games.Remove(game);
+            bool removed = Games.Remove(game);
 
-            if (!Games.Contains(game))
+            if (!removed)
             {
                 throw new GameNotFoundException(game.Title);
             }

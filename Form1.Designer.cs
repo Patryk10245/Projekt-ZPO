@@ -29,22 +29,46 @@
         private void InitializeComponent()
         {
             dataGridViewGames = new DataGridView();
+            btnAddGame = new Button();
+            btnRemoveGame = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewGames).BeginInit();
             SuspendLayout();
             // 
             // dataGridViewGames
             // 
             dataGridViewGames.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewGames.Dock = DockStyle.Fill;
             dataGridViewGames.Location = new Point(0, 0);
             dataGridViewGames.Name = "dataGridViewGames";
-            dataGridViewGames.Size = new Size(284, 261);
+            dataGridViewGames.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewGames.Size = new Size(587, 208);
             dataGridViewGames.TabIndex = 0;
             dataGridViewGames.CellContentClick += dataGridViewGames_CellContentClick;
             // 
+            // btnAddGame
+            // 
+            btnAddGame.Location = new Point(22, 227);
+            btnAddGame.Name = "btnAddGame";
+            btnAddGame.Size = new Size(75, 23);
+            btnAddGame.TabIndex = 1;
+            btnAddGame.Text = "Add Game";
+            btnAddGame.UseVisualStyleBackColor = true;
+            btnAddGame.Click += btnAddGame_Click;
+            // 
+            // btnRemoveGame
+            // 
+            btnRemoveGame.Location = new Point(22, 272);
+            btnRemoveGame.Name = "btnRemoveGame";
+            btnRemoveGame.Size = new Size(99, 23);
+            btnRemoveGame.TabIndex = 2;
+            btnRemoveGame.Text = "Remove Game";
+            btnRemoveGame.UseVisualStyleBackColor = true;
+            btnRemoveGame.Click += btnRemoveGame_Click;
+            // 
             // Form1
             // 
-            ClientSize = new Size(284, 261);
+            ClientSize = new Size(588, 324);
+            Controls.Add(btnRemoveGame);
+            Controls.Add(btnAddGame);
             Controls.Add(dataGridViewGames);
             Name = "Form1";
             Load += Form1_Load;
@@ -56,5 +80,7 @@
         #endregion
 
         public DataGridView dataGridViewGames;
+        private Button btnAddGame;
+        private Button btnRemoveGame;
     }
 }
