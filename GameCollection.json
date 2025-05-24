@@ -8,6 +8,15 @@
       "PlayTime": 1000.0,
       "UserRating": 9.0,
       "Genre": 9
+    },
+    {
+      "Title": "Gothic",
+      "Platform": "PC",
+      "ReleaseDate": 2000,
+      "Description": "Gothic życiem!",
+      "PlayTime": 80.0,
+      "UserRating": 10.0,
+      "Genre": 2
     }
   ]
 }

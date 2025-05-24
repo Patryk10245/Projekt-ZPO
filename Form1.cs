@@ -19,6 +19,7 @@ namespace Projekt_ZPO
             storage = new LibraryStorage();
             library = storage.LoadLibrary();
             RefreshGameTable();
+
         }
 
         private void dataGridViewGames_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -49,6 +50,7 @@ namespace Projekt_ZPO
                     library.AddGame(addGameForm.NewGame);
                     RefreshGameTable();
                     storage.SaveLibrary(library);
+                   
                 }
                 catch (GameAlreadyExistsException ex)
                 {
@@ -95,7 +97,6 @@ namespace Projekt_ZPO
     public class Game
     {
         public string Title { get; set; }
-
         public string Platform { get; set; }
         public int ReleaseDate { get; set; }
         public string Description { get; set; }
@@ -178,14 +179,13 @@ namespace Projekt_ZPO
 
     public class LibraryStorage 
     {
-        private string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\GameCollection.json");
+        private string gameCollectionPath = AppConfig.Instance.gameCollectionPath;
         public void SaveLibrary(Library library)
         {
             try
             {
                 string json = JsonConvert.SerializeObject(library, Formatting.Indented);
-                File.WriteAllText(filePath, json);
-                Console.WriteLine(Path.GetFullPath(filePath));
+                File.WriteAllText(gameCollectionPath, json);
             }
             catch (Exception ex)
             {
@@ -195,9 +195,9 @@ namespace Projekt_ZPO
         }
         public Library LoadLibrary()
         {
-            if (File.Exists(filePath))
+            if (File.Exists(gameCollectionPath))
             {
-                string json = File.ReadAllText(filePath);
+                string json = File.ReadAllText(gameCollectionPath);
                 return JsonConvert.DeserializeObject<Library>(json);
             }
             else
@@ -207,10 +207,8 @@ namespace Projekt_ZPO
         }
 
     }
-    public class AppConfig
-    { }
 
-
+//Excetpions
     public class GameAlreadyExistsException : Exception
     {
         public GameAlreadyExistsException(string title) : base($"Gra {title} ju¿ jest w bibliotece.") { }

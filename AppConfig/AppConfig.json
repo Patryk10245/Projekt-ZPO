@@ -1,0 +1,9 @@
+{
+  "configFile": "AppConfig.json",
+  "gameCollectionFile": "GameCollection.json",
+  "libraryName": "My Game Collection",
+  "appVersion": "1.0.0",
+  "appAuthor": "Serafino",
+  "appDescription": "A simple game collection manager application.",
+  "appLicense": "MIT License"
+}
