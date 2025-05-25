@@ -1,12 +1,13 @@
 
 using Newtonsoft.Json;
+using Projekt_ZPO.Storage;
+using Projekt_ZPO.LibraryManager;
+
 namespace Projekt_ZPO
 {
-
-
     public partial class Form1 : Form
     {
-        LibraryStorage storage;
+        private LibraryStorage storage;
         private Library library = new Library();
 
         public Form1()
@@ -19,11 +20,6 @@ namespace Projekt_ZPO
             storage = new LibraryStorage();
             library = storage.LoadLibrary();
             RefreshGameTable();
-
-        }
-
-        private void dataGridViewGames_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
         }
 
@@ -92,129 +88,5 @@ namespace Projekt_ZPO
             RefreshGameTable();
             }
         }
-    }
-
-    public class Game
-    {
-        public string Title { get; set; }
-        public string Platform { get; set; }
-        public int ReleaseDate { get; set; }
-        public string Description { get; set; }
-        public double PlayTime { get; set; }
-        public double UserRating { get; set; }
-        public GenreType Genre { get; set; }
-
-        public Game(string title, GenreType genre, string platform, int releaseDate, string description, double playTime, double userRating)
-        {
-
-            this.Title = title;
-            this.Genre = genre;
-            this.Platform = platform;
-            this.ReleaseDate = releaseDate;
-            this.PlayTime = Math.Max(playTime, 0);
-            this.UserRating = Math.Clamp(userRating, 0, 10);
-            this.Description = description;
-
-        }
-        public enum GenreType
-        {
-            Action,
-            Adventure,
-            RPG,
-            Simulation,
-            Strategy,
-            Sports,
-            Puzzle,
-            Horror,
-            Racing,
-            Survival,
-            Fighting
-        }
-
-    }
-    public class Library
-    {
-        public List<Game> Games { get; set; }
-        public Library()
-        {
-            Games = new List<Game>();
-        }
-        public void AddGame(Game game)
-        {
-            if (Games.Any(g => g.Title == game.Title))
-            {
-                throw new GameAlreadyExistsException(game.Title);
-            }
-            Games.Add(game);
-        }
-
-        public void RemoveGame(Game game)
-        {
-            bool removed = Games.Remove(game);
-
-            if (!removed)
-            {
-                throw new GameNotFoundException(game.Title);
-            }
-        }
-
-        public void UpdateGame(Game oldGame, Game newGame)
-        {
-            var index = Games.FindIndex(g => g.Title == oldGame.Title);
-            if (index == -1)
-            {
-                Games[index] = newGame;
-            }
-            else
-            {
-                throw new GameNotFoundException(oldGame.Title);
-            }
-        }
-        public List<Game> SearchByTitle(string title)
-        {
-            return Games.Where(g => g.Title.Contains(title, StringComparison.OrdinalIgnoreCase)).ToList();
-        }
-
-    }
-
-    public class LibraryStorage 
-    {
-        private string gameCollectionPath = AppConfig.Instance.gameCollectionPath;
-        public void SaveLibrary(Library library)
-        {
-            try
-            {
-                string json = JsonConvert.SerializeObject(library, Formatting.Indented);
-                File.WriteAllText(gameCollectionPath, json);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error saving collection: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
-        }
-        public Library LoadLibrary()
-        {
-            if (File.Exists(gameCollectionPath))
-            {
-                string json = File.ReadAllText(gameCollectionPath);
-                return JsonConvert.DeserializeObject<Library>(json);
-            }
-            else
-            {
-                return new Library();
-            }
-        }
-
-    }
-
-//Excetpions
-    public class GameAlreadyExistsException : Exception
-    {
-        public GameAlreadyExistsException(string title) : base($"Gra {title} ju¿ jest w bibliotece.") { }
-    }
-    public class GameNotFoundException : Exception
-    {
-        public GameNotFoundException(string title) : base($"Gra {title} nie zosta³a znaleziona w bibliotece.") { }
     }
 }

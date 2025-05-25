@@ -42,7 +42,7 @@
             dataGridViewGames.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewGames.Size = new Size(587, 208);
             dataGridViewGames.TabIndex = 0;
-            dataGridViewGames.CellContentClick += dataGridViewGames_CellContentClick;
+
             // 
             // btnAddGame
             // 
