@@ -42,5 +42,16 @@ namespace Projekt_ZPO
             Survival,
             Fighting
         }
+
+        public enum PlatformType
+        {
+            PC,
+            PS4,
+            PS5,
+            XBOX_ONE,
+            XBOX_SERIES_X,
+            SWITCH
+        }
+        
     }
 }

@@ -35,7 +35,7 @@ namespace Projekt_ZPO.LibraryManager
         public void UpdateGame(Game oldGame, Game newGame)
         {
             var index = Games.FindIndex(g => g.Title == oldGame.Title);
-            if (index == -1)
+            if (index != -1)
             {
                 Games[index] = newGame;
             }

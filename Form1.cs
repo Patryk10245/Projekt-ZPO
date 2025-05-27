@@ -2,12 +2,13 @@
 using Newtonsoft.Json;
 using Projekt_ZPO.Storage;
 using Projekt_ZPO.LibraryManager;
+using Projekt_ZPO.Interfaces;
 
 namespace Projekt_ZPO
 {
     public partial class Form1 : Form
     {
-        private LibraryStorage storage;
+        private ILibraryStorage storage;
         private Library library = new Library();
 
         public Form1()
@@ -46,7 +47,7 @@ namespace Projekt_ZPO
                     library.AddGame(addGameForm.NewGame);
                     RefreshGameTable();
                     storage.SaveLibrary(library);
-                   
+
                 }
                 catch (GameAlreadyExistsException ex)
                 {
@@ -63,30 +64,55 @@ namespace Projekt_ZPO
             }
 
             var confirmRemove = MessageBox.Show(
-                $"Are you sure to remove {dataGridViewGames.SelectedRows.Count} games?", 
-                "Agreed", MessageBoxButtons.YesNo, 
+                $"Are you sure to remove {dataGridViewGames.SelectedRows.Count} games?",
+                "Agreed", MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning);
 
             foreach (DataGridViewRow row in dataGridViewGames.SelectedRows)
             {
-            Game removeGame = library.Games.FirstOrDefault(g => g.Title == dataGridViewGames.CurrentRow.Cells[0].Value.ToString());
-            if (removeGame != null && confirmRemove == DialogResult.Yes)
+                Game removeGame = library.Games.FirstOrDefault(g => g.Title == dataGridViewGames.CurrentRow.Cells[0].Value.ToString());
+                if (removeGame != null && confirmRemove == DialogResult.Yes)
+                {
+                    try
+                    {
+                        library.RemoveGame(removeGame);
+                    }
+                    catch (GameNotFoundException ex)
+                    {
+                        MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("No games on list to delete.", "Empty", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                RefreshGameTable();
+            }
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+
+            var selectedRow = dataGridViewGames.CurrentRow;
+            var selectedGameTitle = selectedRow.Cells[0].Value.ToString();
+            var editGame = library.Games.FirstOrDefault(g => g.Title == selectedGameTitle);
+
+            var editGameForm = new AddGameForm(editGame);
+            if (editGameForm.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
-                    library.RemoveGame(removeGame);
+                    library.UpdateGame(editGame, editGameForm.NewGame);
+                    RefreshGameTable();
+                    storage.SaveLibrary(library);
                 }
                 catch (GameNotFoundException ex)
                 {
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            else
-            {
-                MessageBox.Show("No games on list to delete.", "Empty", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            RefreshGameTable();
-            }
+
+
         }
     }
 }

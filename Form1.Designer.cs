@@ -31,6 +31,7 @@
             dataGridViewGames = new DataGridView();
             btnAddGame = new Button();
             btnRemoveGame = new Button();
+            btnUpdate = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridViewGames).BeginInit();
             SuspendLayout();
             // 
@@ -42,7 +43,6 @@
             dataGridViewGames.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewGames.Size = new Size(587, 208);
             dataGridViewGames.TabIndex = 0;
-
             // 
             // btnAddGame
             // 
@@ -64,13 +64,30 @@
             btnRemoveGame.UseVisualStyleBackColor = true;
             btnRemoveGame.Click += btnRemoveGame_Click;
             // 
+            // btnUpdate
+            // 
+            btnUpdate.Location = new Point(142, 227);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(75, 23);
+            btnUpdate.TabIndex = 3;
+            btnUpdate.Text = "Update";
+            btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += btnUpdate_Click;
+            // 
             // Form1
             // 
+            AutoScroll = true;
+            AutoSize = true;
+            BackColor = SystemColors.GrayText;
             ClientSize = new Size(588, 324);
+            Controls.Add(btnUpdate);
             Controls.Add(btnRemoveGame);
             Controls.Add(btnAddGame);
             Controls.Add(dataGridViewGames);
+            FormBorderStyle = FormBorderStyle.SizableToolWindow;
+            ImeMode = ImeMode.NoControl;
             Name = "Form1";
+            StartPosition = FormStartPosition.CenterScreen;
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridViewGames).EndInit();
             ResumeLayout(false);
@@ -82,5 +99,6 @@
         public DataGridView dataGridViewGames;
         private Button btnAddGame;
         private Button btnRemoveGame;
+        private Button btnUpdate;
     }
 }

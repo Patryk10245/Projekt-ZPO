@@ -21,8 +21,26 @@ namespace Projekt_ZPO
 
             cmbGenre.DataSource = Enum.GetValues(typeof(Game.GenreType));
             cmbGenre.DropDownStyle = ComboBoxStyle.DropDownList;
-            cmbPlatform.Items.AddRange(new string[] { "PC", "PS4", "PS5", "XBOX ONE", "XBOX SERIES X", "SWITCH" });
+            cmbPlatform.DataSource = Enum.GetValues(typeof(Game.PlatformType));
             cmbPlatform.DropDownStyle = ComboBoxStyle.DropDownList;
+
+        }
+
+        public AddGameForm(Game editGame)
+        {
+            InitializeComponent();
+
+            cmbGenre.DataSource = Enum.GetValues(typeof(Game.GenreType));
+            cmbGenre.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbPlatform.DataSource = Enum.GetValues(typeof(Game.PlatformType));
+            cmbPlatform.DropDownStyle = ComboBoxStyle.DropDownList;
+            txtTitle.Text = editGame.Title;
+            cmbPlatform.Text = editGame.Platform;
+            cmbGenre.SelectedItem = editGame.Genre;
+            txtReleaseDate.Text = editGame.ReleaseDate.ToString();
+            txtPlayTime.Text = editGame.PlayTime.ToString();
+            cmbRating.Text = editGame.UserRating.ToString();
+            txtReview.Text = editGame.Description;
 
         }
 
@@ -53,6 +71,7 @@ namespace Projekt_ZPO
                 Console.WriteLine(ex.Message);
             }
         }
+
 
         private void btnCancel_Click(object sender, EventArgs e)
         {

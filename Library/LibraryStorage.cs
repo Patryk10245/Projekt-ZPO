@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Projekt_ZPO.LibraryManager;
+using Projekt_ZPO.Interfaces;
 
 namespace Projekt_ZPO.Storage
 {
-    public class LibraryStorage
+    public class LibraryStorage : ILibraryStorage
     {
         private string gameCollectionPath = AppConfig.Instance.gameCollectionPath;
         public void SaveLibrary(Library library)
