@@ -10,11 +10,14 @@ using System.Windows.Forms;
 using Projekt_ZPO;
 namespace Projekt_ZPO
 {
-    public partial class AddGameForm : Form
+    public partial class AddGameForm : UserControl
     {
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public Game NewGame { get; set; }
+        public event EventHandler<Game> GameAdded;
+        public event EventHandler<Game> Cancel;
+        public event EventHandler<Game> GameUpdated;
         public AddGameForm()
         {
             InitializeComponent();
@@ -62,8 +65,10 @@ namespace Projekt_ZPO
                 string review = txtReview.Text;
 
                 NewGame = new Game(title, genre, platform, releaseDate, review, playtime, userRating);
-                DialogResult = DialogResult.OK;
-                Close();
+                
+                GameAdded?.Invoke(this, NewGame);
+                GameUpdated?.Invoke(this, NewGame);
+
             }
             catch (Exception ex)
             {
@@ -75,8 +80,8 @@ namespace Projekt_ZPO
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
-            Close();
+            //this.Visible = false;
+            Cancel?.Invoke(this, NewGame);
         }
     }
 }

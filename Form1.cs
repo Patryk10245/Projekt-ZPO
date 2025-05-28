@@ -3,6 +3,8 @@ using Newtonsoft.Json;
 using Projekt_ZPO.Storage;
 using Projekt_ZPO.LibraryManager;
 using Projekt_ZPO.Interfaces;
+using FontAwesome.Sharp;
+using System.Runtime.InteropServices;
 
 namespace Projekt_ZPO
 {
@@ -14,6 +16,8 @@ namespace Projekt_ZPO
         public Form1()
         {
             InitializeComponent();
+
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -21,9 +25,10 @@ namespace Projekt_ZPO
             storage = new LibraryStorage();
             library = storage.LoadLibrary();
             RefreshGameTable();
+            ShowGameList();
+            titlePanel.MouseDown += titlePanel_MouseDown;
 
         }
-
         private void RefreshGameTable()
         {
             dataGridViewGames.DataSource = library.Games.Select(g => new
@@ -37,25 +42,58 @@ namespace Projekt_ZPO
                 Genre = g.Genre.ToString()
             }).ToList();
         }
-        private void btnAddGame_Click(object sender, EventArgs e)
+        private void ShowGameList()
         {
-            var addGameForm = new AddGameForm();
-            if (addGameForm.ShowDialog() == DialogResult.OK)
+            mainPanel.Controls.Clear();
+            dataGridViewGames.Dock = DockStyle.Fill;
+            mainPanel.Controls.Add(dataGridViewGames);
+            btnRemoveGame.Enabled = true;
+            btnUpdate.Enabled = true;
+            dataGridViewGames.ClearSelection();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void dataGridViewGames_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void btnAddGame_Click_1(object sender, EventArgs e)
+        {
+            mainPanel.Controls.Clear();
+            var gameControl = new AddGameForm();
+            gameControl.Dock = DockStyle.Fill;
+            mainPanel.Controls.Add(gameControl);
+
+            btnRemoveGame.Enabled = false;
+            btnUpdate.Enabled = false;
+            gameControl.GameAdded += (s, newGame) =>
             {
                 try
                 {
-                    library.AddGame(addGameForm.NewGame);
-                    RefreshGameTable();
+                    library.AddGame(newGame);
                     storage.SaveLibrary(library);
 
+                    RefreshGameTable();
+                    ShowGameList();
                 }
                 catch (GameAlreadyExistsException ex)
                 {
-                    MessageBox.Show(ex.Message, "B³¹d", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
+            };
+            gameControl.Cancel += (s, e) =>
+            {
+                ShowGameList();
+
+            };
         }
-        private void btnRemoveGame_Click(object sender, EventArgs e)
+
+        private void btnRemoveGame_Click_1(object sender, EventArgs e)
         {
             if (dataGridViewGames.SelectedRows.Count == 0)
             {
@@ -90,15 +128,20 @@ namespace Projekt_ZPO
             }
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e)
+        private void btnUpdate_Click_1(object sender, EventArgs e)
         {
-
             var selectedRow = dataGridViewGames.CurrentRow;
             var selectedGameTitle = selectedRow.Cells[0].Value.ToString();
             var editGame = library.Games.FirstOrDefault(g => g.Title == selectedGameTitle);
 
+            if (selectedRow == null || editGame == null) return;
             var editGameForm = new AddGameForm(editGame);
-            if (editGameForm.ShowDialog() == DialogResult.OK)
+            editGameForm.Dock = DockStyle.Fill;
+            mainPanel.Controls.Clear();
+            mainPanel.Controls.Add(editGameForm);
+            btnRemoveGame.Enabled = false;
+            btnUpdate.Enabled = false;
+            editGameForm.GameUpdated += (s, updatedGame) =>
             {
                 try
                 {
@@ -110,9 +153,14 @@ namespace Projekt_ZPO
                 {
                     MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-
+            };
+            editGameForm.Cancel += (s, e) =>
+            {
+                ShowGameList();
+            };
 
         }
+
+
     }
 }

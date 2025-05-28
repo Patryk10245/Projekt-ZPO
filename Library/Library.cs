@@ -15,6 +15,7 @@ namespace Projekt_ZPO.LibraryManager
         }
         public void AddGame(Game game)
         {
+            
             if (Games.Any(g => g.Title == game.Title))
             {
                 throw new GameAlreadyExistsException(game.Title);

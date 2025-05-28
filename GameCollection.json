@@ -17,6 +17,33 @@
       "PlayTime": 80.0,
       "UserRating": 10.0,
       "Genre": 2
+    },
+    {
+      "Title": "Skyrim",
+      "Platform": "PC",
+      "ReleaseDate": 2011,
+      "Description": "Skyrim is my life",
+      "PlayTime": 230.0,
+      "UserRating": 9.0,
+      "Genre": 2
+    },
+    {
+      "Title": "Final Fatasy VII",
+      "Platform": "PS5",
+      "ReleaseDate": 2021,
+      "Description": "Brak",
+      "PlayTime": 12.0,
+      "UserRating": 7.0,
+      "Genre": 2
+    },
+    {
+      "Title": "Tekken 8",
+      "Platform": "PS5",
+      "ReleaseDate": 2023,
+      "Description": "Kung fu fighting :D",
+      "PlayTime": 234.0,
+      "UserRating": 9.0,
+      "Genre": 10
     }
   ]
 }
