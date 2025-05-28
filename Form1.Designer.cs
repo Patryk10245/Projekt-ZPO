@@ -31,6 +31,11 @@
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             dataGridViewGames = new DataGridView();
             panel1 = new Panel();
+            btnResetFilters = new FontAwesome.Sharp.IconButton();
+            cmbPlatformFilter = new ComboBox();
+            txtSearch = new TextBox();
+            btnFilter = new FontAwesome.Sharp.IconButton();
+            cmbGenreFilter = new ComboBox();
             btnUpdate = new FontAwesome.Sharp.IconButton();
             btnRemoveGame = new FontAwesome.Sharp.IconButton();
             btnAddGame = new FontAwesome.Sharp.IconButton();
@@ -38,6 +43,7 @@
             label1 = new Label();
             label2 = new Label();
             titlePanel = new Panel();
+            btnMinimize = new FontAwesome.Sharp.IconButton();
             btnExit = new FontAwesome.Sharp.IconButton();
             mainPanel = new Panel();
             ((System.ComponentModel.ISupportInitialize)dataGridViewGames).BeginInit();
@@ -61,7 +67,7 @@
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
             dataGridViewGames.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             dataGridViewGames.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewGames.Location = new Point(51, 252);
+            dataGridViewGames.Location = new Point(50, 253);
             dataGridViewGames.Name = "dataGridViewGames";
             dataGridViewGames.RowHeadersVisible = false;
             dataGridViewGames.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -76,6 +82,11 @@
             // panel1
             // 
             panel1.BackColor = Color.SlateBlue;
+            panel1.Controls.Add(btnResetFilters);
+            panel1.Controls.Add(cmbPlatformFilter);
+            panel1.Controls.Add(txtSearch);
+            panel1.Controls.Add(btnFilter);
+            panel1.Controls.Add(cmbGenreFilter);
             panel1.Controls.Add(btnUpdate);
             panel1.Controls.Add(btnRemoveGame);
             panel1.Controls.Add(btnAddGame);
@@ -86,6 +97,73 @@
             panel1.Size = new Size(200, 559);
             panel1.TabIndex = 4;
             panel1.Paint += panel1_Paint;
+            // 
+            // btnResetFilters
+            // 
+            btnResetFilters.Anchor = AnchorStyles.Left;
+            btnResetFilters.FlatAppearance.BorderSize = 0;
+            btnResetFilters.FlatStyle = FlatStyle.Flat;
+            btnResetFilters.Font = new Font("Segoe UI", 14F);
+            btnResetFilters.IconChar = FontAwesome.Sharp.IconChar.JediOrder;
+            btnResetFilters.IconColor = Color.Silver;
+            btnResetFilters.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnResetFilters.IconSize = 32;
+            btnResetFilters.ImageAlign = ContentAlignment.MiddleLeft;
+            btnResetFilters.Location = new Point(2, 396);
+            btnResetFilters.Name = "btnResetFilters";
+            btnResetFilters.Padding = new Padding(10, 0, 0, 0);
+            btnResetFilters.Size = new Size(200, 60);
+            btnResetFilters.TabIndex = 14;
+            btnResetFilters.Text = "Reset Filters";
+            btnResetFilters.TextAlign = ContentAlignment.MiddleLeft;
+            btnResetFilters.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnResetFilters.UseVisualStyleBackColor = true;
+            btnResetFilters.Click += btnResetFilters_Click;
+            // 
+            // cmbPlatformFilter
+            // 
+            cmbPlatformFilter.FormattingEnabled = true;
+            cmbPlatformFilter.Location = new Point(106, 358);
+            cmbPlatformFilter.Name = "cmbPlatformFilter";
+            cmbPlatformFilter.Size = new Size(76, 23);
+            cmbPlatformFilter.TabIndex = 13;
+            // 
+            // txtSearch
+            // 
+            txtSearch.Location = new Point(11, 263);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(171, 23);
+            txtSearch.TabIndex = 11;
+            // 
+            // btnFilter
+            // 
+            btnFilter.Anchor = AnchorStyles.Left;
+            btnFilter.FlatAppearance.BorderSize = 0;
+            btnFilter.FlatStyle = FlatStyle.Flat;
+            btnFilter.Font = new Font("Segoe UI", 14F);
+            btnFilter.IconChar = FontAwesome.Sharp.IconChar.JediOrder;
+            btnFilter.IconColor = Color.Silver;
+            btnFilter.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnFilter.IconSize = 32;
+            btnFilter.ImageAlign = ContentAlignment.MiddleLeft;
+            btnFilter.Location = new Point(2, 292);
+            btnFilter.Name = "btnFilter";
+            btnFilter.Padding = new Padding(10, 0, 0, 0);
+            btnFilter.Size = new Size(200, 60);
+            btnFilter.TabIndex = 11;
+            btnFilter.Text = "Sort";
+            btnFilter.TextAlign = ContentAlignment.MiddleLeft;
+            btnFilter.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnFilter.UseVisualStyleBackColor = true;
+            btnFilter.Click += btnFilter_Click;
+            // 
+            // cmbGenreFilter
+            // 
+            cmbGenreFilter.FormattingEnabled = true;
+            cmbGenreFilter.Location = new Point(11, 358);
+            cmbGenreFilter.Name = "cmbGenreFilter";
+            cmbGenreFilter.Size = new Size(79, 23);
+            cmbGenreFilter.TabIndex = 12;
             // 
             // btnUpdate
             // 
@@ -169,7 +247,7 @@
             label1.BackColor = Color.Transparent;
             label1.FlatStyle = FlatStyle.Flat;
             label1.Font = new Font("Segoe UI", 20F);
-            label1.Location = new Point(0, 9);
+            label1.Location = new Point(-1, 10);
             label1.Name = "label1";
             label1.Size = new Size(91, 37);
             label1.TabIndex = 4;
@@ -180,7 +258,7 @@
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
             label2.Font = new Font("Britannic Bold", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(3, 46);
+            label2.Location = new Point(2, 47);
             label2.Name = "label2";
             label2.Size = new Size(161, 30);
             label2.TabIndex = 5;
@@ -189,20 +267,50 @@
             // titlePanel
             // 
             titlePanel.BackColor = Color.SlateBlue;
+            titlePanel.Controls.Add(btnMinimize);
             titlePanel.Controls.Add(btnExit);
             titlePanel.Dock = DockStyle.Top;
             titlePanel.Location = new Point(200, 0);
             titlePanel.Name = "titlePanel";
-            titlePanel.Size = new Size(810, 76);
+            titlePanel.Size = new Size(888, 73);
             titlePanel.TabIndex = 5;
-
+            // 
+            // btnMinimize
+            // 
+            btnMinimize.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnMinimize.FlatStyle = FlatStyle.Flat;
+            btnMinimize.IconChar = FontAwesome.Sharp.IconChar.WindowMinimize;
+            btnMinimize.IconColor = Color.Black;
+            btnMinimize.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnMinimize.IconSize = 20;
+            btnMinimize.Location = new Point(765, 1);
+            btnMinimize.Name = "btnMinimize";
+            btnMinimize.Size = new Size(61, 23);
+            btnMinimize.TabIndex = 1;
+            btnMinimize.UseVisualStyleBackColor = true;
+            btnMinimize.Click += btnMinimize_Click;
+            // 
+            // btnExit
+            // 
+            btnExit.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            btnExit.FlatStyle = FlatStyle.Flat;
+            btnExit.IconChar = FontAwesome.Sharp.IconChar.X;
+            btnExit.IconColor = Color.Black;
+            btnExit.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            btnExit.IconSize = 20;
+            btnExit.Location = new Point(826, 1);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(61, 23);
+            btnExit.TabIndex = 0;
+            btnExit.UseVisualStyleBackColor = true;
+            btnExit.Click += btnExit_Click;
             // 
             // mainPanel
             // 
             mainPanel.Dock = DockStyle.Fill;
-            mainPanel.Location = new Point(200, 76);
+            mainPanel.Location = new Point(200, 73);
             mainPanel.Name = "mainPanel";
-            mainPanel.Size = new Size(810, 483);
+            mainPanel.Size = new Size(888, 486);
             mainPanel.TabIndex = 6;
             // 
             // Form1
@@ -210,7 +318,7 @@
             AutoScroll = true;
             AutoSize = true;
             BackColor = SystemColors.GrayText;
-            ClientSize = new Size(1010, 559);
+            ClientSize = new Size(1088, 559);
             Controls.Add(mainPanel);
             Controls.Add(titlePanel);
             Controls.Add(panel1);
@@ -221,6 +329,7 @@
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridViewGames).EndInit();
             panel1.ResumeLayout(false);
+            panel1.PerformLayout();
             panelLogo.ResumeLayout(false);
             panelLogo.PerformLayout();
             titlePanel.ResumeLayout(false);
@@ -241,5 +350,11 @@
         private Panel titlePanel;
         private Panel mainPanel;
         private FontAwesome.Sharp.IconButton btnExit;
+        private FontAwesome.Sharp.IconButton btnMinimize;
+        private TextBox txtSearch;
+        private ComboBox cmbGenreFilter;
+        private ComboBox cmbPlatformFilter;
+        private FontAwesome.Sharp.IconButton btnFilter;
+        private FontAwesome.Sharp.IconButton btnResetFilters;
     }
 }

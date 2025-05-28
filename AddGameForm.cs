@@ -44,6 +44,8 @@ namespace Projekt_ZPO
             txtPlayTime.Text = editGame.PlayTime.ToString();
             cmbRating.Text = editGame.UserRating.ToString();
             txtReview.Text = editGame.Description;
+            chkCompleted.Text = editGame.IsCompleted ? "Zakończona" : "W trakcie";
+
 
         }
 
@@ -63,8 +65,9 @@ namespace Projekt_ZPO
                 double playtime = double.Parse(txtPlayTime.Text);
                 double userRating = double.Parse(cmbRating.Text);
                 string review = txtReview.Text;
+                bool IsCompleted = chkCompleted.Text == "Completed" ? true : false;
 
-                NewGame = new Game(title, genre, platform, releaseDate, review, playtime, userRating);
+                NewGame = new Game(title, genre, platform, releaseDate, review, playtime, userRating, IsCompleted);
                 
                 GameAdded?.Invoke(this, NewGame);
                 GameUpdated?.Invoke(this, NewGame);

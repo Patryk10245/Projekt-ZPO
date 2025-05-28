@@ -27,7 +27,21 @@ namespace Projekt_ZPO
             RefreshGameTable();
             ShowGameList();
             titlePanel.MouseDown += titlePanel_MouseDown;
+            this.DoubleBuffered = true;
 
+
+            cmbGenreFilter.DataSource = Enum.GetValues(typeof(Game.GenreType));
+            cmbGenreFilter.DropDownStyle = ComboBoxStyle.DropDownList;
+            cmbPlatformFilter.DataSource = Enum.GetValues(typeof(Game.PlatformType));
+            cmbPlatformFilter.DropDownStyle = ComboBoxStyle.DropDownList;
+
+            
+            cmbGenreFilter.SelectedIndex = -1;
+            cmbPlatformFilter.SelectedIndex = -1;
+
+            txtSearch.Text = "Search by title";
+            cmbGenreFilter.Text = "Select Genre";
+            cmbPlatformFilter.Text = "Select Platform";
         }
         private void RefreshGameTable()
         {
@@ -39,7 +53,8 @@ namespace Projekt_ZPO
                 g.Description,
                 g.PlayTime,
                 g.UserRating,
-                Genre = g.Genre.ToString()
+                Genre = g.Genre.ToString(),
+                g.IsCompleted
             }).ToList();
         }
         private void ShowGameList()
@@ -160,7 +175,78 @@ namespace Projekt_ZPO
             };
 
         }
+        [DllImport("user32.dll")]
+        public static extern bool ReleaseCapture();
 
+        [DllImport("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int msg, int wParam, int lParam);
+        private void titlePanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(this.Handle, 0xA1, 0x2, 0);
+            }
+        }
 
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnMinimize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            string searchTerm = txtSearch.Text.Trim();
+            var filterGames = library.Games.AsEnumerable();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                filterGames = filterGames.Where(g => g.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase));
+            }
+            if (cmbGenreFilter.SelectedIndex != -1)
+            {
+                var selectedGenre = (Game.GenreType)cmbGenreFilter.SelectedItem;
+                filterGames = filterGames.Where(g => g.Genre == selectedGenre);
+            }
+
+            if (cmbPlatformFilter.SelectedIndex != -1)
+            {
+                var selectedPlatform = (Game.PlatformType)cmbPlatformFilter.SelectedItem;
+                filterGames = filterGames.Where(g => g.Platform == selectedPlatform.ToString());
+            }
+            if (filterGames.Any())
+            {
+                dataGridViewGames.DataSource = filterGames.Select(g => new
+                {
+                    g.Title,
+                    g.Platform,
+                    g.ReleaseDate,
+                    g.Description,
+                    g.PlayTime,
+                    g.UserRating,
+                    Genre = g.Genre.ToString(),
+                    g.IsCompleted,
+                }).ToList();
+            }
+            else
+            {
+                MessageBox.Show("No games found matching the selected filters.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                RefreshGameTable();
+
+            }
+        }
+
+        private void btnResetFilters_Click(object sender, EventArgs e)
+        {
+            cmbGenreFilter.SelectedIndex = -1;
+            cmbPlatformFilter.SelectedIndex = -1;
+            RefreshGameTable();
+            dataGridViewGames.ClearSelection();
+        }
     }
 }

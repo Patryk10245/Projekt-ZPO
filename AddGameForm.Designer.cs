@@ -44,6 +44,7 @@
             btnCancel = new Button();
             txtUserRating = new Label();
             cmbRating = new ComboBox();
+            chkCompleted = new CheckBox();
             SuspendLayout();
             // 
             // labelTitle
@@ -57,9 +58,11 @@
             // 
             // txtTitle
             // 
+            txtTitle.BorderStyle = BorderStyle.None;
             txtTitle.Location = new Point(26, 40);
+            txtTitle.Multiline = true;
             txtTitle.Name = "txtTitle";
-            txtTitle.Size = new Size(260, 23);
+            txtTitle.Size = new Size(382, 23);
             txtTitle.TabIndex = 1;
             // 
             // lblGenre
@@ -146,9 +149,11 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(72, 294);
+            btnSave.BackgroundImageLayout = ImageLayout.None;
+            btnSave.FlatStyle = FlatStyle.Flat;
+            btnSave.Location = new Point(47, 280);
             btnSave.Name = "btnSave";
-            btnSave.Size = new Size(75, 23);
+            btnSave.Size = new Size(100, 37);
             btnSave.TabIndex = 12;
             btnSave.Text = "Save";
             btnSave.UseVisualStyleBackColor = true;
@@ -156,9 +161,11 @@
             // 
             // btnCancel
             // 
-            btnCancel.Location = new Point(175, 294);
+            btnCancel.BackgroundImageLayout = ImageLayout.None;
+            btnCancel.FlatStyle = FlatStyle.Flat;
+            btnCancel.Location = new Point(175, 280);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(75, 23);
+            btnCancel.Size = new Size(97, 37);
             btnCancel.TabIndex = 13;
             btnCancel.Text = "Cancel";
             btnCancel.UseVisualStyleBackColor = true;
@@ -181,11 +188,21 @@
             cmbRating.Size = new Size(47, 23);
             cmbRating.TabIndex = 15;
             // 
+            // chkCompleted
+            // 
+            chkCompleted.AutoSize = true;
+            chkCompleted.Location = new Point(318, 192);
+            chkCompleted.Name = "chkCompleted";
+            chkCompleted.Size = new Size(90, 19);
+            chkCompleted.TabIndex = 16;
+            chkCompleted.Text = "Completed?";
+            chkCompleted.UseVisualStyleBackColor = true;
+            // 
             // AddGameForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(360, 339);
+            Controls.Add(chkCompleted);
             Controls.Add(cmbRating);
             Controls.Add(txtUserRating);
             Controls.Add(btnCancel);
@@ -203,7 +220,7 @@
             Controls.Add(txtTitle);
             Controls.Add(labelTitle);
             Name = "AddGameForm";
-            Text = "AddGameForm";
+            Size = new Size(434, 339);
             Load += AddGameForm_Load;
             ResumeLayout(false);
             PerformLayout();
@@ -227,5 +244,6 @@
         private Button btnCancel;
         private Label txtUserRating;
         private ComboBox cmbRating;
+        private CheckBox chkCompleted;
     }
 }

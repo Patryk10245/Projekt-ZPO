@@ -15,8 +15,16 @@ namespace Projekt_ZPO
         public double PlayTime { get; set; }
         public double UserRating { get; set; }
         public GenreType Genre { get; set; }
+        public bool IsCompleted { get; set; } = false;
 
-        public Game(string title, GenreType genre, string platform, int releaseDate, string description, double playTime, double userRating)
+        public Game(string title, 
+            GenreType genre, 
+            string platform, 
+            int releaseDate, 
+            string description, 
+            double playTime, 
+            double userRating, 
+            bool IsCompleted)
         {
 
             this.Title = title;
@@ -26,6 +34,8 @@ namespace Projekt_ZPO
             this.PlayTime = Math.Max(playTime, 0);
             this.UserRating = Math.Clamp(userRating, 0, 10);
             this.Description = description;
+            this.IsCompleted = IsCompleted;
+
 
         }
         public enum GenreType
