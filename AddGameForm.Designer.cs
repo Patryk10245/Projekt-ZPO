@@ -45,6 +45,8 @@
             txtUserRating = new Label();
             cmbRating = new ComboBox();
             chkCompleted = new CheckBox();
+            chkSinglePlayer = new CheckBox();
+            chkCooperative = new CheckBox();
             SuspendLayout();
             // 
             // labelTitle
@@ -101,7 +103,7 @@
             // 
             // txtReleaseDate
             // 
-            txtReleaseDate.Location = new Point(175, 91);
+            txtReleaseDate.Location = new Point(244, 91);
             txtReleaseDate.Name = "txtReleaseDate";
             txtReleaseDate.Size = new Size(97, 23);
             txtReleaseDate.TabIndex = 6;
@@ -109,7 +111,7 @@
             // lblDate
             // 
             lblDate.AutoSize = true;
-            lblDate.Location = new Point(175, 73);
+            lblDate.Location = new Point(244, 73);
             lblDate.Name = "lblDate";
             lblDate.Size = new Size(76, 15);
             lblDate.TabIndex = 7;
@@ -118,7 +120,7 @@
             // lblPlayTime
             // 
             lblPlayTime.AutoSize = true;
-            lblPlayTime.Location = new Point(175, 124);
+            lblPlayTime.Location = new Point(244, 124);
             lblPlayTime.Name = "lblPlayTime";
             lblPlayTime.Size = new Size(62, 15);
             lblPlayTime.TabIndex = 8;
@@ -126,7 +128,7 @@
             // 
             // txtPlayTime
             // 
-            txtPlayTime.Location = new Point(175, 142);
+            txtPlayTime.Location = new Point(244, 142);
             txtPlayTime.Name = "txtPlayTime";
             txtPlayTime.Size = new Size(97, 23);
             txtPlayTime.TabIndex = 9;
@@ -143,15 +145,16 @@
             // txtReview
             // 
             txtReview.Location = new Point(26, 225);
+            txtReview.Multiline = true;
             txtReview.Name = "txtReview";
-            txtReview.Size = new Size(260, 23);
+            txtReview.Size = new Size(513, 68);
             txtReview.TabIndex = 11;
             // 
             // btnSave
             // 
             btnSave.BackgroundImageLayout = ImageLayout.None;
             btnSave.FlatStyle = FlatStyle.Flat;
-            btnSave.Location = new Point(47, 280);
+            btnSave.Location = new Point(119, 320);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(100, 37);
             btnSave.TabIndex = 12;
@@ -163,7 +166,7 @@
             // 
             btnCancel.BackgroundImageLayout = ImageLayout.None;
             btnCancel.FlatStyle = FlatStyle.Flat;
-            btnCancel.Location = new Point(175, 280);
+            btnCancel.Location = new Point(335, 320);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(97, 37);
             btnCancel.TabIndex = 13;
@@ -191,17 +194,41 @@
             // chkCompleted
             // 
             chkCompleted.AutoSize = true;
-            chkCompleted.Location = new Point(318, 192);
+            chkCompleted.Location = new Point(251, 182);
             chkCompleted.Name = "chkCompleted";
             chkCompleted.Size = new Size(90, 19);
             chkCompleted.TabIndex = 16;
             chkCompleted.Text = "Completed?";
             chkCompleted.UseVisualStyleBackColor = true;
             // 
+            // chkSinglePlayer
+            // 
+            chkSinglePlayer.AutoSize = true;
+            chkSinglePlayer.Location = new Point(410, 95);
+            chkSinglePlayer.Name = "chkSinglePlayer";
+            chkSinglePlayer.Size = new Size(93, 19);
+            chkSinglePlayer.TabIndex = 17;
+            chkSinglePlayer.Text = "Single Player";
+            chkSinglePlayer.UseVisualStyleBackColor = true;
+            chkSinglePlayer.CheckedChanged += chkSinglePlayer_CheckedChanged;
+            // 
+            // chkCooperative
+            // 
+            chkCooperative.AutoSize = true;
+            chkCooperative.Location = new Point(410, 144);
+            chkCooperative.Name = "chkCooperative";
+            chkCooperative.Size = new Size(90, 19);
+            chkCooperative.TabIndex = 18;
+            chkCooperative.Text = "Cooperative";
+            chkCooperative.UseVisualStyleBackColor = true;
+            chkCooperative.CheckedChanged += chkCooperative_CheckedChanged;
+            // 
             // AddGameForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            Controls.Add(chkCooperative);
+            Controls.Add(chkSinglePlayer);
             Controls.Add(chkCompleted);
             Controls.Add(cmbRating);
             Controls.Add(txtUserRating);
@@ -220,7 +247,7 @@
             Controls.Add(txtTitle);
             Controls.Add(labelTitle);
             Name = "AddGameForm";
-            Size = new Size(434, 339);
+            Size = new Size(584, 387);
             Load += AddGameForm_Load;
             ResumeLayout(false);
             PerformLayout();
@@ -245,5 +272,7 @@
         private Label txtUserRating;
         private ComboBox cmbRating;
         private CheckBox chkCompleted;
+        private CheckBox chkSinglePlayer;
+        private CheckBox chkCooperative;
     }
 }

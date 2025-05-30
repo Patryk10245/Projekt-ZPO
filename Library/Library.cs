@@ -45,10 +45,6 @@ namespace Projekt_ZPO.LibraryManager
                 throw new GameNotFoundException(oldGame.Title);
             }
         }
-        public List<Game> SearchByTitle(string title)
-        {
-            return Games.Where(g => g.Title.Contains(title, StringComparison.OrdinalIgnoreCase)).ToList();
-        }
 
     }
 }

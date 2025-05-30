@@ -60,7 +60,7 @@
             dataGridViewGames.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
-            dataGridViewCellStyle1.Font = new Font("Segoe UI", 14F);
+            dataGridViewCellStyle1.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
             dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
@@ -94,7 +94,7 @@
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(200, 559);
+            panel1.Size = new Size(200, 588);
             panel1.TabIndex = 4;
             panel1.Paint += panel1_Paint;
             // 
@@ -103,13 +103,13 @@
             btnResetFilters.Anchor = AnchorStyles.Left;
             btnResetFilters.FlatAppearance.BorderSize = 0;
             btnResetFilters.FlatStyle = FlatStyle.Flat;
-            btnResetFilters.Font = new Font("Segoe UI", 14F);
+            btnResetFilters.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
             btnResetFilters.IconChar = FontAwesome.Sharp.IconChar.JediOrder;
             btnResetFilters.IconColor = Color.Silver;
             btnResetFilters.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnResetFilters.IconSize = 32;
             btnResetFilters.ImageAlign = ContentAlignment.MiddleLeft;
-            btnResetFilters.Location = new Point(2, 396);
+            btnResetFilters.Location = new Point(2, 411);
             btnResetFilters.Name = "btnResetFilters";
             btnResetFilters.Padding = new Padding(10, 0, 0, 0);
             btnResetFilters.Size = new Size(200, 60);
@@ -123,7 +123,7 @@
             // cmbPlatformFilter
             // 
             cmbPlatformFilter.FormattingEnabled = true;
-            cmbPlatformFilter.Location = new Point(106, 358);
+            cmbPlatformFilter.Location = new Point(106, 371);
             cmbPlatformFilter.Name = "cmbPlatformFilter";
             cmbPlatformFilter.Size = new Size(76, 23);
             cmbPlatformFilter.TabIndex = 13;
@@ -140,13 +140,13 @@
             btnFilter.Anchor = AnchorStyles.Left;
             btnFilter.FlatAppearance.BorderSize = 0;
             btnFilter.FlatStyle = FlatStyle.Flat;
-            btnFilter.Font = new Font("Segoe UI", 14F);
+            btnFilter.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
             btnFilter.IconChar = FontAwesome.Sharp.IconChar.JediOrder;
             btnFilter.IconColor = Color.Silver;
             btnFilter.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnFilter.IconSize = 32;
             btnFilter.ImageAlign = ContentAlignment.MiddleLeft;
-            btnFilter.Location = new Point(2, 292);
+            btnFilter.Location = new Point(2, 307);
             btnFilter.Name = "btnFilter";
             btnFilter.Padding = new Padding(10, 0, 0, 0);
             btnFilter.Size = new Size(200, 60);
@@ -160,7 +160,7 @@
             // cmbGenreFilter
             // 
             cmbGenreFilter.FormattingEnabled = true;
-            cmbGenreFilter.Location = new Point(11, 358);
+            cmbGenreFilter.Location = new Point(11, 371);
             cmbGenreFilter.Name = "cmbGenreFilter";
             cmbGenreFilter.Size = new Size(79, 23);
             cmbGenreFilter.TabIndex = 12;
@@ -170,7 +170,7 @@
             btnUpdate.Dock = DockStyle.Top;
             btnUpdate.FlatAppearance.BorderSize = 0;
             btnUpdate.FlatStyle = FlatStyle.Flat;
-            btnUpdate.Font = new Font("Segoe UI", 14F);
+            btnUpdate.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
             btnUpdate.IconChar = FontAwesome.Sharp.IconChar.JediOrder;
             btnUpdate.IconColor = Color.Silver;
             btnUpdate.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -192,8 +192,8 @@
             btnRemoveGame.Dock = DockStyle.Top;
             btnRemoveGame.FlatAppearance.BorderSize = 0;
             btnRemoveGame.FlatStyle = FlatStyle.Flat;
-            btnRemoveGame.Font = new Font("Segoe UI", 14F);
-            btnRemoveGame.IconChar = FontAwesome.Sharp.IconChar.DeleteLeft;
+            btnRemoveGame.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            btnRemoveGame.IconChar = FontAwesome.Sharp.IconChar.Backspace;
             btnRemoveGame.IconColor = Color.Silver;
             btnRemoveGame.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnRemoveGame.IconSize = 32;
@@ -214,8 +214,8 @@
             btnAddGame.Dock = DockStyle.Top;
             btnAddGame.FlatAppearance.BorderSize = 0;
             btnAddGame.FlatStyle = FlatStyle.Flat;
-            btnAddGame.Font = new Font("Segoe UI", 14F);
-            btnAddGame.IconChar = FontAwesome.Sharp.IconChar.Add;
+            btnAddGame.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            btnAddGame.IconChar = FontAwesome.Sharp.IconChar.Plus;
             btnAddGame.IconColor = Color.Silver;
             btnAddGame.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnAddGame.IconSize = 32;
@@ -246,7 +246,7 @@
             label1.AutoSize = true;
             label1.BackColor = Color.Transparent;
             label1.FlatStyle = FlatStyle.Flat;
-            label1.Font = new Font("Segoe UI", 20F);
+            label1.Font = new Font("Segoe UI", 20F, FontStyle.Regular, GraphicsUnit.Point);
             label1.Location = new Point(-1, 10);
             label1.Name = "label1";
             label1.Size = new Size(91, 37);
@@ -257,7 +257,7 @@
             // 
             label2.AutoSize = true;
             label2.BackColor = Color.Transparent;
-            label2.Font = new Font("Britannic Bold", 20.25F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Font = new Font("Britannic Bold", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
             label2.Location = new Point(2, 47);
             label2.Name = "label2";
             label2.Size = new Size(161, 30);
@@ -272,7 +272,7 @@
             titlePanel.Dock = DockStyle.Top;
             titlePanel.Location = new Point(200, 0);
             titlePanel.Name = "titlePanel";
-            titlePanel.Size = new Size(888, 73);
+            titlePanel.Size = new Size(1227, 73);
             titlePanel.TabIndex = 5;
             // 
             // btnMinimize
@@ -283,7 +283,7 @@
             btnMinimize.IconColor = Color.Black;
             btnMinimize.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnMinimize.IconSize = 20;
-            btnMinimize.Location = new Point(765, 1);
+            btnMinimize.Location = new Point(1104, 1);
             btnMinimize.Name = "btnMinimize";
             btnMinimize.Size = new Size(61, 23);
             btnMinimize.TabIndex = 1;
@@ -298,7 +298,7 @@
             btnExit.IconColor = Color.Black;
             btnExit.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnExit.IconSize = 20;
-            btnExit.Location = new Point(826, 1);
+            btnExit.Location = new Point(1165, 1);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(61, 23);
             btnExit.TabIndex = 0;
@@ -310,7 +310,7 @@
             mainPanel.Dock = DockStyle.Fill;
             mainPanel.Location = new Point(200, 73);
             mainPanel.Name = "mainPanel";
-            mainPanel.Size = new Size(888, 486);
+            mainPanel.Size = new Size(1227, 515);
             mainPanel.TabIndex = 6;
             // 
             // Form1
@@ -318,7 +318,7 @@
             AutoScroll = true;
             AutoSize = true;
             BackColor = SystemColors.GrayText;
-            ClientSize = new Size(1088, 559);
+            ClientSize = new Size(1427, 588);
             Controls.Add(mainPanel);
             Controls.Add(titlePanel);
             Controls.Add(panel1);

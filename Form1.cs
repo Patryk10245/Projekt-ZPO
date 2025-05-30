@@ -35,7 +35,7 @@ namespace Projekt_ZPO
             cmbPlatformFilter.DataSource = Enum.GetValues(typeof(Game.PlatformType));
             cmbPlatformFilter.DropDownStyle = ComboBoxStyle.DropDownList;
 
-            
+
             cmbGenreFilter.SelectedIndex = -1;
             cmbPlatformFilter.SelectedIndex = -1;
 
@@ -50,11 +50,15 @@ namespace Projekt_ZPO
                 g.Title,
                 g.Platform,
                 g.ReleaseDate,
-                g.Description,
                 g.PlayTime,
                 g.UserRating,
                 Genre = g.Genre.ToString(),
-                g.IsCompleted
+                g.IsCompleted,
+                Type = g is CooperativeGame ? "Co-op" : "Single",
+                g.Description
+
+
+
             }).ToList();
         }
         private void ShowGameList()
@@ -64,6 +68,9 @@ namespace Projekt_ZPO
             mainPanel.Controls.Add(dataGridViewGames);
             btnRemoveGame.Enabled = true;
             btnUpdate.Enabled = true;
+            btnAddGame.Enabled = true;
+            btnFilter.Enabled = true;
+            btnResetFilters.Enabled = true;
             dataGridViewGames.ClearSelection();
         }
 
@@ -156,13 +163,17 @@ namespace Projekt_ZPO
             mainPanel.Controls.Add(editGameForm);
             btnRemoveGame.Enabled = false;
             btnUpdate.Enabled = false;
+            btnAddGame.Enabled = false;
+            btnFilter.Enabled = false;
+            btnResetFilters.Enabled = false;
             editGameForm.GameUpdated += (s, updatedGame) =>
             {
                 try
                 {
-                    library.UpdateGame(editGame, editGameForm.NewGame);
+                    library.UpdateGame(editGame, updatedGame);
                     RefreshGameTable();
                     storage.SaveLibrary(library);
+                    ShowGameList();
                 }
                 catch (GameNotFoundException ex)
                 {
@@ -248,5 +259,7 @@ namespace Projekt_ZPO
             RefreshGameTable();
             dataGridViewGames.ClearSelection();
         }
+
+
     }
 }

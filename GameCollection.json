@@ -1,54 +1,52 @@
 {
   "Games": [
     {
+      "$type": "Projekt_ZPO.SinglePlayerGame, Projekt_ZPO",
+      "HasStoryMode": true,
       "Title": "Minecraft",
       "Platform": "PC",
       "ReleaseDate": 2011,
-      "Description": "Minecraft is good",
-      "PlayTime": 1000.0,
-      "UserRating": 5.5,
+      "Description": "Minecraft jest super!!",
+      "PlayTime": 1200.0,
+      "UserRating": 10.0,
       "Genre": 9,
-      "IsCompleted": false
+      "IsCompleted": true
     },
     {
+      "$type": "Projekt_ZPO.SinglePlayerGame, Projekt_ZPO",
+      "HasStoryMode": true,
       "Title": "Gothic",
       "Platform": "PC",
       "ReleaseDate": 2000,
-      "Description": "Gothic życiem!",
+      "Description": "Śniący!!! Zbudź się!!!",
       "PlayTime": 80.0,
-      "UserRating": 10.0,
+      "UserRating": 8.0,
       "Genre": 2,
       "IsCompleted": false
     },
     {
-      "Title": "Skyrim",
-      "Platform": "PC",
-      "ReleaseDate": 2011,
-      "Description": "Skyrim is my life",
-      "PlayTime": 230.0,
-      "UserRating": 9.0,
-      "Genre": 2,
-      "IsCompleted": false
-    },
-    {
-      "Title": "Final Fatasy VII",
-      "Platform": "PS5",
-      "ReleaseDate": 2021,
-      "Description": "Brak",
-      "PlayTime": 12.0,
-      "UserRating": 7.0,
-      "Genre": 2,
-      "IsCompleted": false
-    },
-    {
-      "Title": "Tekken 8",
-      "Platform": "PS5",
-      "ReleaseDate": 2023,
-      "Description": "Kung fu fighting :D",
-      "PlayTime": 234.0,
+      "$type": "Projekt_ZPO.CooperativeGame, Projekt_ZPO",
+      "HasCooperativeMode": true,
+      "Title": "Super Smash Bros",
+      "Platform": "SWITCH",
+      "ReleaseDate": 2016,
+      "Description": "Fight!",
+      "PlayTime": 23.0,
       "UserRating": 9.0,
       "Genre": 10,
       "IsCompleted": false
+    },
+    {
+      "$type": "Projekt_ZPO.SinglePlayerGame, Projekt_ZPO",
+      "HasStoryMode": true,
+      "Title": "Life is Strange: Double Exposure",
+      "Platform": "PS5",
+      "ReleaseDate": 2024,
+      "Description": "",
+      "PlayTime": 23.0,
+      "UserRating": 7.0,
+      "Genre": 1,
+      "IsCompleted": true
     }
   ]
 }

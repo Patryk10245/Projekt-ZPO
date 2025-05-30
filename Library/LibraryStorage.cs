@@ -14,9 +14,15 @@ namespace Projekt_ZPO.Storage
         private string gameCollectionPath = AppConfig.Instance.gameCollectionPath;
         public void SaveLibrary(Library library)
         {
+            var settings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Auto,
+                Formatting = Formatting.Indented
+            };
+
             try
             {
-                string json = JsonConvert.SerializeObject(library, Formatting.Indented);
+                string json = JsonConvert.SerializeObject(library, settings);
                 File.WriteAllText(gameCollectionPath, json);
             }
             catch (Exception ex)
@@ -27,10 +33,15 @@ namespace Projekt_ZPO.Storage
         }
         public Library LoadLibrary()
         {
+            var settings = new JsonSerializerSettings
+            {
+                TypeNameHandling = TypeNameHandling.Auto,
+                Formatting = Formatting.Indented
+            };
             if (File.Exists(gameCollectionPath))
             {
                 string json = File.ReadAllText(gameCollectionPath);
-                return JsonConvert.DeserializeObject<Library>(json);
+                return JsonConvert.DeserializeObject<Library>(json, settings);
             }
             else
             {

@@ -7,14 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Projekt_ZPO;
+using GameClass = Projekt_ZPO.Game;
 namespace Projekt_ZPO
 {
     public partial class AddGameForm : UserControl
     {
         [Browsable(false)]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
-        public Game NewGame { get; set; }
+        public GameClass NewGame { get; set; }
         public event EventHandler<Game> GameAdded;
         public event EventHandler<Game> Cancel;
         public event EventHandler<Game> GameUpdated;
@@ -44,8 +44,9 @@ namespace Projekt_ZPO
             txtPlayTime.Text = editGame.PlayTime.ToString();
             cmbRating.Text = editGame.UserRating.ToString();
             txtReview.Text = editGame.Description;
-            chkCompleted.Text = editGame.IsCompleted ? "Zakończona" : "W trakcie";
-
+            chkCompleted.Checked = editGame.IsCompleted;
+            chkSinglePlayer.Checked = editGame is SinglePlayerGame;
+            chkCooperative.Checked = editGame is CooperativeGame;
 
         }
 
@@ -65,10 +66,22 @@ namespace Projekt_ZPO
                 double playtime = double.Parse(txtPlayTime.Text);
                 double userRating = double.Parse(cmbRating.Text);
                 string review = txtReview.Text;
-                bool IsCompleted = chkCompleted.Text == "Completed" ? true : false;
+                bool IsCompleted = chkCompleted.Checked;
+                bool hasStoryMode = chkSinglePlayer.Checked;
+                bool hasCooperativeMode = chkCooperative.Checked;
 
-                NewGame = new Game(title, genre, platform, releaseDate, review, playtime, userRating, IsCompleted);
-                
+                if (chkSinglePlayer.Checked)
+                {
+                    NewGame = new SinglePlayerGame(title, genre, platform, releaseDate, review, playtime, userRating, IsCompleted, hasStoryMode);
+                }
+                else if (chkCooperative.Checked)
+                {
+                    NewGame = new CooperativeGame(title, genre, platform, releaseDate, review, playtime, userRating, IsCompleted, hasCooperativeMode);
+                }
+                else
+                {
+                    throw new Exception("Please select a game type (Single Player or Cooperative).");
+                }
                 GameAdded?.Invoke(this, NewGame);
                 GameUpdated?.Invoke(this, NewGame);
 
@@ -85,6 +98,30 @@ namespace Projekt_ZPO
         {
             //this.Visible = false;
             Cancel?.Invoke(this, NewGame);
+        }
+
+        private void chkSinglePlayer_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkSinglePlayer.Checked)
+            {
+                chkCooperative.Visible = false;
+            }
+            else
+            {
+                chkCooperative.Visible = true;
+            }
+        }
+
+        private void chkCooperative_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chkCooperative.Checked)
+            {
+                chkSinglePlayer.Visible = false;
+            }
+            else
+            {
+                chkSinglePlayer.Visible = true;
+            }
         }
     }
 }

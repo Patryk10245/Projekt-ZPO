@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Projekt_ZPO
 {
-    public class Game
+    public abstract class Game
     {
         public string Title { get; set; }
         public string Platform { get; set; }
@@ -15,29 +15,29 @@ namespace Projekt_ZPO
         public double PlayTime { get; set; }
         public double UserRating { get; set; }
         public GenreType Genre { get; set; }
-        public bool IsCompleted { get; set; } = false;
+        public bool IsCompleted { get; set; }
 
-        public Game(string title, 
-            GenreType genre, 
-            string platform, 
-            int releaseDate, 
-            string description, 
-            double playTime, 
-            double userRating, 
-            bool IsCompleted)
-        {
+        //public Game(string title, 
+        //    GenreType genre, 
+        //    string platform, 
+        //    int releaseDate, 
+        //    string description, 
+        //    double playTime, 
+        //    double userRating, 
+        //    bool IsCompleted)
+        //{
 
-            this.Title = title;
-            this.Genre = genre;
-            this.Platform = platform;
-            this.ReleaseDate = releaseDate;
-            this.PlayTime = Math.Max(playTime, 0);
-            this.UserRating = Math.Clamp(userRating, 0, 10);
-            this.Description = description;
-            this.IsCompleted = IsCompleted;
+        //    Title = title;
+        //    Genre = genre;
+        //    Platform = platform;
+        //    ReleaseDate = releaseDate;
+        //    PlayTime = Math.Max(playTime, 0);
+        //    UserRating = Math.Clamp(userRating, 0, 10);
+        //    Description = description;
+        //    this.IsCompleted = IsCompleted;
 
 
-        }
+        //}
         public enum GenreType
         {
             Action,
@@ -62,6 +62,7 @@ namespace Projekt_ZPO
             XBOX_SERIES_X,
             SWITCH
         }
-        
+        public abstract string GetGameDetails();
+
     }
 }
