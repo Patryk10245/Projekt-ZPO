@@ -104,7 +104,7 @@
             btnResetFilters.FlatAppearance.BorderSize = 0;
             btnResetFilters.FlatStyle = FlatStyle.Flat;
             btnResetFilters.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            btnResetFilters.IconChar = FontAwesome.Sharp.IconChar.JediOrder;
+            btnResetFilters.IconChar = FontAwesome.Sharp.IconChar.Retweet;
             btnResetFilters.IconColor = Color.Silver;
             btnResetFilters.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnResetFilters.IconSize = 32;
@@ -141,7 +141,7 @@
             btnFilter.FlatAppearance.BorderSize = 0;
             btnFilter.FlatStyle = FlatStyle.Flat;
             btnFilter.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            btnFilter.IconChar = FontAwesome.Sharp.IconChar.JediOrder;
+            btnFilter.IconChar = FontAwesome.Sharp.IconChar.SpaceAwesome;
             btnFilter.IconColor = Color.Silver;
             btnFilter.IconFont = FontAwesome.Sharp.IconFont.Auto;
             btnFilter.IconSize = 32;

@@ -5,6 +5,7 @@ using Projekt_ZPO.LibraryManager;
 using Projekt_ZPO.Interfaces;
 using FontAwesome.Sharp;
 using System.Runtime.InteropServices;
+using Projekt_ZPO.Exceptions;
 
 namespace Projekt_ZPO
 {

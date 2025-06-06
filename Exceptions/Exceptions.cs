@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Projekt_ZPO
+namespace Projekt_ZPO.Exceptions
 {
     public class GameAlreadyExistsException : Exception
     {
