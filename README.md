@@ -1,7 +1,7 @@
 ## ✅ Wymagania funkcjonalne
-[x] Projekt powinien przedstawiać kompletną, działającą aplikację na wybrany przez Studenta temat. 
-[x] Powinien zawieraćgraficzny interfejs użytkownika (np. WinForms, WPF, Web)
-[x] obsługa danych (plikowa lub bazodanowa)
+- [x] Projekt powinien przedstawiać kompletną, działającą aplikację na wybrany przez Studenta temat. 
+- [x] Powinien zawieraćgraficzny interfejs użytkownika (np. WinForms, WPF, Web)
+- [x] obsługa danych (plikowa lub bazodanowa)
 
 
 ## ✅Wymagania techniczne
